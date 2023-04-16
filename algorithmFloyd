@@ -1,0 +1,73 @@
+#include <iostream>
+#include <vector>
+
+
+class Graph
+{
+public:
+	std::vector<std::vector<int>> vec;
+	int size;
+	Graph(std::vector<std::vector<int>> &vec_edges, int size)
+	{
+		this->vec.operator=(vec_edges);
+		this->size = size;
+	}
+	~Graph(){}
+	void floyd(Graph& graph, int size);
+};
+
+void Graph::floyd(Graph& graph, int size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = 0; j < size; j++)
+		{
+			for (int k = 0; k < size; k++)
+			{
+				if (j == k || graph.vec[j][i] == 0 || graph.vec[i][k] == 0)
+					continue;
+
+				graph.vec[j][k] = std::min(graph.vec[j][k], graph.vec[j][i] + graph.vec[i][k]);
+			}
+		}
+	}
+}
+
+void print_graph(Graph const&graph, int size)
+{
+	for (int i = 0; i < size; ++i)
+	{
+		for (int j = 0; j < graph.vec[i].size(); ++j)
+		{
+			std::cout << graph.vec[i][j] << " ";
+		} std::cout << std::endl;
+	}
+}
+
+
+int main()
+{
+	system("chcp 1251");
+	system("cls");
+
+	std::vector<std::vector<int>> edges
+	{
+		{0, 1, 6, 0},
+		{0, 0, 4, 1},
+		{0, 0, 0, 0},
+		{0, 0, 1, 0}
+
+		/*{0, 3, 1},
+		{3, 0, 1},
+		{1, 1, 0}*/
+	};
+
+	int n = 4;
+	Graph graph(edges, n);
+	print_graph(graph, edges.size());
+
+	std::cout << std::endl;
+
+	graph.floyd(graph, n);
+	print_graph(graph, n);
+}
