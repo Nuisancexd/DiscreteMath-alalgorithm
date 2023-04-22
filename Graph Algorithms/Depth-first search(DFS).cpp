@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <stack>
 #include <vector>
@@ -8,14 +7,14 @@
 class DFS : public adj_list_node
 {
 public:
-	
+
 	void dfs(graph* grph, int v)
 	{
 		std::stack<int> st;
 		std::vector<bool> visited(v, false);
 
 		st.push(v);
-
+		visited[v - 1] = true;
 		while (!st.empty())
 		{
 			v = st.top();
