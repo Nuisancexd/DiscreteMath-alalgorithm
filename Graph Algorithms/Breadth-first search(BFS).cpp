@@ -8,14 +8,12 @@
 class BFS : public adj_list_node
 {
 public:
-	std::vector<bool> vec;
 	void bfs(graph* grph, int v)
 	{
+		std::vector<bool> visited(v, false);
 		std::queue<int> que;
 		que.push(v);
-		vec.resize(v);
-		for (auto e : vec) { e = false; }
-		vec[v - 1] = true;
+		visited[v - 1] = true;
 		while (!que.empty())
 		{
 			v = que.front();
@@ -24,11 +22,11 @@ public:
 
 			for (int i = 0; i < grph->v; ++i)
 			{
-				if (vec[i]) continue;
+				if (visited[i]) continue;
 				adj_list_node* root = grph->arr[i].head;
 				if (root)
 				{
-					vec[i] = true;
+					visited[i] = true;
 					que.push(root->data);
 					root = root->next;
 				}
@@ -58,7 +56,7 @@ int main()
 	gn.add_edge(g, 4, 0);
 	gn.add_edge(g, 4, 1);
 	gn.add_edge(g, 4, 5);
-	
+
 	BFS bfs;
 	bfs.bfs(g, vert);
 	std::cout << std::endl;
