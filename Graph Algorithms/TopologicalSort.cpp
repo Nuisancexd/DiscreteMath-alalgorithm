@@ -21,7 +21,6 @@ public:
 
 		for (int i = 0; i < vec.size(); ++i)
 		{
-			std::cout << i << vec[i] << std::endl;
 			if (!visited[vec[i]])
 			{
 				dfs(g, vec[i], visited, stack);
