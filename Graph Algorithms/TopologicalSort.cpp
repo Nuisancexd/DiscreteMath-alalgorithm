@@ -86,7 +86,13 @@ int main()
 	gn.add_edge_s(g, 3, 6);
 	gn.add_edge_s(g, 3, 7);
 	gn.add_edge_s(g, 4, 6);
-
+	
+	/*gn.add_edge_s(g, 5, 2);
+	gn.add_edge_s(g, 5, 0);
+	gn.add_edge_s(g, 4, 0);
+	gn.add_edge_s(g, 4, 1);
+	gn.add_edge_s(g, 2, 3);
+	gn.add_edge_s(g, 3, 1);*/
 
 	TopologicalSort ts;
 	ts.topological_sort(g);
